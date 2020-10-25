@@ -1,0 +1,40 @@
+Mettre en place le replica asset : 
+
+Accéder au serveur ( sur lequel vous avez votre base de données que vous voulez répliquer ) et écrire dans le terminal : 
+
+sudo nano /etc/mongod.conf
+
+Cette commande permet de créer et d'éditer un fichier nommé "mongod.conf".
+
+Dans ce fichier, écrire : 
+
+replication:
+  replSetName: rs0
+  oplogSizeMB: 100
+
+Ajouter votre nom d'hôte en tant qu'alias. Identifiez votre nom d'hôte en tapant : 
+
+hostname
+
+Désormais, écrivez : ‘myhostname’. Ensuite tapez :
+
+nano /etc/hosts
+
+Ajoutez à ce fichier :
+
+127.0.0.1 myhostname
+
+Redémarrez mongodb:
+
+sudo service mongod stop
+sudo service mongod start
+
+Pour initialiser le replica set:
+
+mongo
+
+Enfin, tapez dans le mongo shell:
+
+use local
+rs.initiate()
+
